@@ -1,0 +1,19 @@
+name: pyenv
+version: 0.0.1
+inherits: wercker/ubuntu12.04-webessentials@1.0.4
+type: main
+platform: ubuntu@12.04
+keywords:
+  - pyenv
+  - python
+script: |
+  sudo apt-get update -y
+  sudo apt-get install git zlib1g-dev libreadline-dev libqtwebkit-dev curl -y
+  cd
+  git clone git://github.com/yyuu/pyenv.git .pyenv
+  echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
+  echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
+  echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
+  exec $SHELL
+  pyenv install 2.7.8
+  pyenv rehash
